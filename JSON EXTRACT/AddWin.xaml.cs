@@ -19,23 +19,19 @@ namespace JSON_EXTRACT
     /// </summary>
     public partial class AddWin : Window
     {
-
-        string NameTxt;
-        bool NameBool;
+        // Text
         Dictionary<string, int> AiredOnTxt = new Dictionary<string, int>();
-        List<string> days30 = new List<string>() { "4", "6", "9", "11" };
-        bool AiredBool;
-        string Year;
-        string Day;
-        string Month;
+        string NameTxt;
         string RatingTxt;
+        string MainCharsTxt;        
+        string GenresTxt;
+        // Bools
+        bool NameBool;
+        bool AiredBool;
         bool RatingBool;
-        string MainCharsTxt;
         bool MainCharsBool;
-        string GeneresTxt;
-        bool GeneresBool;
+        bool GenresBool;
         bool InputSuccess;
-        
 
         public AddWin()
         {
@@ -47,19 +43,13 @@ namespace JSON_EXTRACT
             AiredOnMethod();
             if (InputSuccess)
             {
-                Movie movie = new Movie();
-                movie.Name = NameTxt;
-                movie.Airdate = new DateTime(AiredOnTxt["Year"], AiredOnTxt["Day"], AiredOnTxt["Month"]);
-                movie.RottenTomatoRating = Convert.ToInt32(RatingTxt);
-                movie.MainCharacters = MainCharsTxt.Split(',').ToArray();
-                movie.Genres = GeneresTxt;
-                string moviedetails = JsonConvert.SerializeObject(movie);
-                File.WriteAllText($@".\Jsons\{NameTxt}.txt", moviedetails);
-                LabelJson2.Content = "Status: Success!, " + Environment.NewLine + "Find the movie by typing it's name.";
+                LabelJson2.Content = $"Status: Success!, \n Find the movie by typing {NameTxt}";
+                SuccessfulInput();
             }
             else
             {
-                LabelJson2.Content = "Status: Error, " + Environment.NewLine + "Invalid Input, Whitespace or invalid format.";
+                LabelJson2.Content = "Status: Error, Invalid Input \n Whitespace or invalid format.";
+                AiredOnTxt.Clear();
             }
         }
 
@@ -68,19 +58,22 @@ namespace JSON_EXTRACT
             NameTxt = Name.Text;
             NameBool = !string.IsNullOrWhiteSpace(NameTxt);
             InputSuccess = (NameBool && AiredBool && RatingBool
-                && MainCharsBool && GeneresBool);
+                && MainCharsBool && GenresBool);
         }
 
         private void AiredOnMethod()
         {
-            Year = AiredOnYear.Text;
-            Day = AiredOnDay.Text;
-            Month = AiredOnMonth.Text;
+
+            List<string> days30 = new List<string>() { "4", "6", "9", "11" };
+            string Year = AiredOnYear.Text;
+            string Day = AiredOnDay.Text;
+            string Month = AiredOnMonth.Text;
+            var invalidDate = (days30.Contains(Month) && Day == "31")
+                || (Convert.ToInt32(Year) % 4 != 0 && Day == "29" && Month == "2")
+                || (Convert.ToInt32(Day) > 31 || Convert.ToInt32(Month) > 12);
             AiredBool = !string.IsNullOrWhiteSpace(Year) &&
                 !string.IsNullOrWhiteSpace(Day) && !string.IsNullOrWhiteSpace(Month);
-            if (AiredBool) if ((days30.Contains(Month) && Day == "31")
-                || (Convert.ToInt32(Year) % 4 != 0 && Day == "29" && Month == "2")
-                || (Convert.ToInt32(Day) > 31 || Convert.ToInt32(Month) > 12)) AiredBool = false;
+            if (AiredBool) if (invalidDate) AiredBool = false;
                 if (AiredBool)
                 {
                     AiredOnTxt.Add("Year", Convert.ToInt32(Year));
@@ -88,16 +81,15 @@ namespace JSON_EXTRACT
                     AiredOnTxt.Add("Month",Convert.ToInt32(Month));
                 }
             InputSuccess = (NameBool && AiredBool && RatingBool
-                && MainCharsBool && GeneresBool);
+                && MainCharsBool && GenresBool);
         }
 
         private void RTRating_TextChanged(object sender, TextChangedEventArgs e)
         {
             RatingTxt = RTRating.Text;
-            RatingBool = !string.IsNullOrWhiteSpace(RatingTxt);
-            if (RatingBool) if (Convert.ToInt32(RatingTxt) > 100) RatingBool = false;
+            RatingBool = !string.IsNullOrWhiteSpace(RatingTxt) && Convert.ToInt32(RatingTxt) > 100;           
             InputSuccess = (NameBool && AiredBool && RatingBool
-                && MainCharsBool && GeneresBool);
+                && MainCharsBool && GenresBool);
         }
 
         private void MainChars_TextChanged(object sender, TextChangedEventArgs e)
@@ -105,15 +97,15 @@ namespace JSON_EXTRACT
             MainCharsTxt = MainChars.Text;
             MainCharsBool = !string.IsNullOrWhiteSpace(MainCharsTxt);
             InputSuccess = (NameBool && AiredBool && RatingBool
-                && MainCharsBool && GeneresBool);
+                && MainCharsBool && GenresBool);
         }
 
-        private void Generes_TextChanged(object sender, TextChangedEventArgs e)
+        private void Genres_TextChanged(object sender, TextChangedEventArgs e)
         {
-            GeneresTxt = Generes.Text;
-            GeneresBool = !string.IsNullOrWhiteSpace(GeneresTxt);
+            GenresTxt = Genres.Text;
+            GenresBool = !string.IsNullOrWhiteSpace(GenresTxt);
             InputSuccess = (NameBool && AiredBool && RatingBool
-                && MainCharsBool && GeneresBool);
+                && MainCharsBool && GenresBool);
         }
 
         private void back_Click(object sender, RoutedEventArgs e)
@@ -121,6 +113,18 @@ namespace JSON_EXTRACT
             MainWindow main = new MainWindow();
             main.Show();
             this.Close();
+        }
+        private void SuccessfulInput()
+        {
+            getset.Movie movie = new getset.Movie();
+            movie.Name = NameTxt;
+            movie.Airdate = new DateTime(AiredOnTxt["Year"], AiredOnTxt["Day"], AiredOnTxt["Month"]);
+            movie.RottenTomatoRating = Convert.ToInt32(RatingTxt);
+            movie.MainCharacters = MainCharsTxt.Split(',').ToArray();
+            movie.Genres = GenresTxt;
+            string moviedetails = JsonConvert.SerializeObject(movie);
+            File.WriteAllText($@".\Jsons\{NameTxt}.txt", moviedetails);
+            AiredOnTxt.Clear();
         }
     }
 

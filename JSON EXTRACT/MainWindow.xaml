@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JSON_EXTRACT"
         mc:Ignorable="d"
-        Title="JsonWin" Height="350" Width="284" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="JsonWin" Height="332.667" Width="350" ShowInTaskbar="False" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="ButtonJson" Content="Click" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="Button_Click" Margin="0,0,0,40"/>
-        <Label x:Name="LabelJson" Content="Status:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="30" Width="176" Margin="67,0,0,117" RenderTransformOrigin="0.5,0.5">
+        <Button x:Name="ButtonJson" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="74" Click="Button_Click" Content="Search" Margin="0,0,0,35"/>
+        <Label x:Name="LabelJson" Content="Status:" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="30" Width="176" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,95">
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -18,10 +18,13 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <TextBlock x:Name="Result" HorizontalAlignment="Left" Height="150" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" Margin="10,10,-4,0" Text="Name:&#xD;&#xA;&#xD;&#xA;Aired on:
-                   &#xD;&#xA;&#xD;&#xA;Rotten Tomatoes Rating:&#xD;&#xA;&#xD;&#xA;Main Characters:&#xD;&#xA;&#xD;&#xA;Generes:"/>
         <Button x:Name="AddNew" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="74" Click="AddNew_Click" Margin="0,0,0,10"/>
-        <TextBox x:Name="TextboxJson" HorizontalAlignment="Center" Height="37" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="150" TextChanged="InputText" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,75"/>
+        <TextBox x:Name="TextboxJson" HorizontalAlignment="Center" Height="28" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="150" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,65"/>
+        <TextBlock x:Name="NameOutput" HorizontalAlignment="Left" Margin="10,20,0,0" TextWrapping="Wrap" Text="Name:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="AiredOnOutput" HorizontalAlignment="Left" Margin="10,55,0,0" TextWrapping="Wrap" Text="Aired on:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="RTOutput" HorizontalAlignment="Left" Margin="10,90,0,0" TextWrapping="Wrap" Text="Rotten Tomatoes Rating:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="MainCharsOutput" HorizontalAlignment="Left" Margin="10,125,0,0" TextWrapping="Wrap" Text="Main Characters:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="GenreOutput" HorizontalAlignment="Left" Margin="10,160,0,0" TextWrapping="Wrap" Text="Genre:" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

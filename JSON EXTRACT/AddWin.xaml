@@ -9,12 +9,12 @@
     <Grid VerticalAlignment="Top" Height="220">
         <Button x:Name="ButtonJson2" Content="Add" Width="75" Height="20" Click="ButtonJson2_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,21,30"/>
         <Label x:Name="LabelJson2" Content="Status:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="44" Width="223" Margin="0,0,0,5"/>
-        <TextBlock x:Name="Result2" HorizontalAlignment="Left" Height="153" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Margin="10,10,0,0" Text="Name:&#xA;&#xA;Aired on: year, day, month&#xA;&#xA;Rotten Tomatoes Rating:&#xA;&#xA;Main Characters: abc, xyz&#xA;&#xA;Generes:"/>
+        <TextBlock x:Name="Result2" HorizontalAlignment="Left" Height="153" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Margin="10,10,0,0" Text="Name:&#xA;&#xA;Aired on: year, day, month&#xA;&#xA;Rotten Tomatoes Rating:&#xA;&#xA;Main Characters: abc, xyz&#xA;&#xA;Genres:"/>
         <TextBox x:Name="Name" HorizontalAlignment="Left" Height="20" Margin="162,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" TextChanged="Name_TextChanged" AcceptsTab="True"/>
         <TextBox x:Name="RTRating" HorizontalAlignment="Left" Height="20" Margin="162,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" TextChanged="RTRating_TextChanged"/>
         <TextBox x:Name="AiredOnYear" HorizontalAlignment="Left" Height="20" Margin="162,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" MaxLength="4"/>
         <TextBox x:Name="MainChars" HorizontalAlignment="Left" Height="20" Margin="162,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" TextChanged="MainChars_TextChanged"/>
-        <TextBox x:Name="Generes" HorizontalAlignment="Left" Height="20" Margin="162,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" TextChanged="Generes_TextChanged"/>
+        <TextBox x:Name="Genres" HorizontalAlignment="Left" Height="20" Margin="162,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="151" TextChanged="Genres_TextChanged"/>
         <Button x:Name="back" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Click="back_Click" Margin="0,0,21,5"/>
         <TextBox x:Name="AiredOnDay" HorizontalAlignment="Left" Height="20" Margin="214,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" MaxLength="2">
             <TextBox.BindingGroup>
